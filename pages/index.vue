@@ -207,9 +207,11 @@
           >
             Cancel
           </button>
-          <button class="px-4 py-2 bg-yellow-400 text-black rounded-md">
-            Next
-          </button>
+          <router-link to="/dashboard"
+            ><button class="px-4 py-2 bg-yellow-400 text-black rounded-md">
+              Next
+            </button></router-link
+          >
         </div>
       </div>
     </div>

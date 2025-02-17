@@ -1,22 +1,30 @@
-<script>
-export default {
-  props: {
-    image: String,
-    title: String,
-    price: String,
-    creator: String,
-  },
-};
-</script>
-
 <template>
-  <div class="bg-gray-800 p-4 rounded-lg">
+  <div
+    class="bg-gray-800 p-4 rounded-lg cursor-pointer hover:shadow-lg transition"
+    @click="goToDetails"
+  >
     <img :src="image" alt="NFT Image" class="w-full h-40 object-cover rounded-md" />
-    <h3 class="text-white font-bold mt-2">{{ title }}</h3>
+    <h3 class="mt-2 text-white font-semibold">{{ title }}</h3>
     <p class="text-gray-400 text-sm">{{ creator }}</p>
-    <div class="flex justify-between items-center mt-2">
-      <p class="text-yellow-400 font-semibold">{{ price }}</p>
-      <button class="bg-yellow-400 text-black px-3 py-1 rounded-md text-sm">Buy</button>
-    </div>
+    <p class="text-yellow-400 text-sm mt-1">{{ price }} ETH</p>
   </div>
 </template>
+
+<script setup>
+import { useRouter } from "vue-router";
+
+const props = defineProps(["image", "title", "price", "creator"]);
+const router = useRouter();
+
+const goToDetails = () => {
+  router.push({
+    path: `/nft-details/${props.title.replace(/\s+/g, "-").toLowerCase()}`,
+    query: {
+      image: props.image,
+      title: props.title,
+      price: props.price,
+      creator: props.creator,
+    },
+  });
+};
+</script>
